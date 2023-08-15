@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc -p .",
-    "start": "node dist/server.js"
+    "start": "ts-node src/server.ts"
   },
   "author": "",
   "license": "ISC",
