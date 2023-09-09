@@ -28,8 +28,8 @@ const orderSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    required: true,
     enum: ["pending", "delivered"],
+    default: "pending",
   },
 
   total: {
