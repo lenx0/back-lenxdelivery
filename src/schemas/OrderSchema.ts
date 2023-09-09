@@ -1,5 +1,15 @@
 import mongoose from "../database";
 
+interface IOrder extends Document {
+  code: number;
+  address: string;
+  latitude?: string;
+  longitude: string;
+  moment: Date;
+  status: "pending" | "delivered";
+  total?: string;
+}
+
 const orderSchema = new mongoose.Schema({
   code: {
     type: Number,
@@ -24,6 +34,7 @@ const orderSchema = new mongoose.Schema({
   moment: {
     type: Date,
     required: true,
+    default: Date.now,
   },
 
   status: {
@@ -37,6 +48,6 @@ const orderSchema = new mongoose.Schema({
   },
 });
 
-const OrderSchema = mongoose.model("orders", orderSchema);
+const OrderSchema = mongoose.model<IOrder>("orders", orderSchema)
 
 export default OrderSchema;
