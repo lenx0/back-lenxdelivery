@@ -1,7 +1,6 @@
 import mongoose from "../database";
 
 interface IOrder extends Document {
-  code: number;
   address: string;
   latitude?: string;
   longitude: string;
@@ -11,12 +10,6 @@ interface IOrder extends Document {
 }
 
 const orderSchema = new mongoose.Schema({
-  code: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-
   address: {
     type: String,
     required: true,
