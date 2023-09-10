@@ -6,7 +6,12 @@ interface IOrder extends Document {
   longitude: string;
   moment: Date;
   status: "pending" | "delivered";
-  total?: string;
+  products: Array<{
+    name: string;
+    price: number;
+    description: string;
+    imageUri: string;
+  }>;
 }
 
 const orderSchema = new mongoose.Schema({
@@ -36,9 +41,14 @@ const orderSchema = new mongoose.Schema({
     default: "pending",
   },
 
-  total: {
-    type: String,
-  },
+  products: [
+    {
+      name: String,
+      price: Number,
+      description: String,
+      imageUri: String,
+    }
+  ]
 });
 
 const OrderSchema = mongoose.model<IOrder>("orders", orderSchema)
