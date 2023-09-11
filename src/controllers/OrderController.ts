@@ -12,12 +12,26 @@ class OrderController {
     }
   }
 
+  // async findOrder(req: Request, res: Response) {
+  //   try {
+  //     const orders = await OrderSchema.find(req.body);
+  
+  //     console.log("Pedidos listados:", orders);
+  
+  //     console.log("LIST");
+  //     return res.send(orders);
+  //   } catch (err) {
+  //     return res.status(400).send({ error: err });
+  //   }
+  // }
+
   async findOrder(req: Request, res: Response) {
     try {
-      const orders = await OrderSchema.find(req.body);
-  
+      // Filtra os pedidos para não incluir os "delivered"
+      const orders = await OrderSchema.find({ status: { $ne: 'delivered' } });
+    
       console.log("Pedidos listados:", orders);
-  
+    
       console.log("LIST");
       return res.send(orders);
     } catch (err) {
@@ -68,6 +82,29 @@ class OrderController {
       return res.status(400).send({ error: err });
     }
   }
+
+  // async updateOrderStatus(req: Request, res: Response) {
+  //   try {
+  //     const orderId = req.params.id;
+      
+  //     const updatedOrder = await OrderSchema.findByIdAndUpdate(
+  //       orderId,
+  //       { status: "delivered" },
+  //       { new: true }
+  //     );
+  
+  //     if (!updatedOrder) {
+  //       return res.status(404).send({ error: 'Pedido não encontrado.' });
+  //     }
+  
+  //     // Remove o pedido do banco de dados
+  //     await updatedOrder.remove();
+  
+  //     return res.send({ message: 'Pedido entregue e removido com sucesso.' });
+  //   } catch (err) {
+  //     return res.status(400).send({ error: err });
+  //   }
+  // }
 
   async deleteOrder(req: Request, res: Response) {
     try {
