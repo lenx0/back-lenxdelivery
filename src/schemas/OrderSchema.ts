@@ -12,6 +12,7 @@ interface IOrder extends Document {
     description: string;
     imageUri: string;
   }>;
+  totalPrice: number;
 }
 
 const orderSchema = new mongoose.Schema({
@@ -47,10 +48,15 @@ const orderSchema = new mongoose.Schema({
       price: Number,
       description: String,
       imageUri: String,
-    }
-  ]
+    },
+  ],
+
+  totalPrice: {
+    type: Number,
+  },
+
 });
 
-const OrderSchema = mongoose.model<IOrder>("orders", orderSchema)
+const OrderSchema = mongoose.model<IOrder>("orders", orderSchema);
 
 export default OrderSchema;
