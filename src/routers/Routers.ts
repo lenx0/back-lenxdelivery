@@ -16,6 +16,7 @@ mainRouter.post("/order/create/", orderController.createOrder);
 mainRouter.get("/order/list/", orderController.findOrder);
 mainRouter.post("/order/list/:_id", orderController.findOrderById);
 mainRouter.put("/order/update/:_id", orderController.updateOrder);
+mainRouter.put("/order/:id/deliver", orderController.updateOrderStatus);
 mainRouter.delete("/order/delete/:_id", orderController.deleteOrder);
 
 

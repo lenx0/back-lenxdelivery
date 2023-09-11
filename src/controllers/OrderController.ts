@@ -49,6 +49,26 @@ class OrderController {
     }
   }
 
+  async updateOrderStatus(req: Request, res: Response) {
+    try {
+      const orderId = req.params.id;
+      
+      const updatedOrder = await OrderSchema.findByIdAndUpdate(
+        orderId,
+        { status: "delivered" },
+        { new: true }
+      );
+  
+      if (!updatedOrder) {
+        return res.status(404).send({ error: 'Pedido não encontrado.' });
+      }
+  
+      return res.send(updatedOrder);
+    } catch (err) {
+      return res.status(400).send({ error: err });
+    }
+  }
+
   async deleteOrder(req: Request, res: Response) {
     try {
       const orders = await OrderSchema.findByIdAndDelete(req.params._id);
